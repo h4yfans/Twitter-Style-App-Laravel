@@ -18,22 +18,32 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'avatar'
+        'avatar',
+        'profileUrl'
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany('App\Post');
     }
 
-    public function getAvatar(){
-        return 'https://www.gravatar.com/avatar/' .md5($this->email) . 'x?s=45&d=mm';
+    public function getAvatar()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->email) . 'x?s=45&d=mm';
     }
 
-    public function getAvatarAttribute(){
+    public function getAvatarAttribute()
+    {
         return $this->getAvatar();
     }
-    
-    public function getRouteKeyName(){
+
+    public function getProfileUrlAttribute()
+    {
+        return route('user.index', $this);
+    }
+
+    public function getRouteKeyName()
+    {
         return 'username';
     }
 }
