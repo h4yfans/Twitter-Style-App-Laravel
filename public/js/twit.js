@@ -3,7 +3,8 @@ new Vue({
     data: {
         post: '',
         posts: [],
-        limit: 20
+        limit: 2,
+        total: 0
     },
     methods: {
         postStatus: function (e) {
@@ -31,11 +32,19 @@ new Vue({
                 }
             }).done(function (data) {
                 this.posts = data.posts;
-                console.log(data);
+                this.total = data.total
             }.bind(this));
+        },
+        getMorePost: function (e) {
+            e.preventDefault();
+            this.limit = this.limit + this.limit;
+            this.getPosts();
+
         }
     },
     mounted: function () {
+        this.getPosts();
+
         setInterval(function () {
             this.getPosts();
         }.bind(this), 10000);

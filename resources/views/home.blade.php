@@ -28,6 +28,8 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <a href="#" class="btn btn-primary" v-if="total > posts.length" v-on:click="getMorePost($event)">Show more</a>
             </div>
         </div>
     </div>
