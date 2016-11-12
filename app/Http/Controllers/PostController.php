@@ -7,14 +7,31 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index(Request $request, Post $post)
+    {
+        $allPosts = $post->whereIn(
+            'user_id',
+            $request->user()->following()->pluck('user_id')->push($request->user()->id) // collection
+        )->with('user');
+
+        $posts = $allPosts->orderBy('created_at', 'desc')
+            ->take($request->get('limit', 20))
+            ->get();
+
+        return response()->json([
+            'posts' => $posts,
+            'total' => $allPosts->count()
+        ]);
+    }
+
     public function create(Request $request, Post $post)
     {
-        $this->validate($request,[
-           'body' => 'required|max:140',
+        $this->validate($request, [
+            'body' => 'required|max:140',
         ]);
 
         $createdPost = $request->user()->posts()->create([
-           'body' => $request->body,
+            'body' => $request->body,
         ]);
         return response()->json($post->with('user')->find($createdPost->id));
     }

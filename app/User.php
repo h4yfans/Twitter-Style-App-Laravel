@@ -71,7 +71,14 @@ class User extends Authenticatable
         return !$this->isFollowing($user);
     }
 
-    public function canUnfollow(User $user){
+    public function canUnfollow(User $user)
+    {
         return $this->isFollowing($user);
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'follower_id', 'user_id');
+    }
+
 }
