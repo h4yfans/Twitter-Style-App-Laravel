@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function canFollow(User $user)
     {
-        if ($this->isNot($user)) {
+        if (!$this->isNot($user)) {
             return false;
         }
 
