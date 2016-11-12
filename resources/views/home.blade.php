@@ -14,6 +14,7 @@
             </div>
             <div class="col-md-8">
                 <p v-if="!posts.length">No posts to see here yet. Follow someone and make it happen</p>
+
                 <div class="post" v-if="posts.length">
                     <div class="media" v-for="post in posts" track-by="id">
                         <div class="media-left">
