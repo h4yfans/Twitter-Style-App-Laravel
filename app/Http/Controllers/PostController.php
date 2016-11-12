@@ -16,7 +16,6 @@ class PostController extends Controller
         $createdPost = $request->user()->posts()->create([
            'body' => $request->body,
         ]);
-
         return response()->json($post->with('user')->find($createdPost->id));
     }
 }
