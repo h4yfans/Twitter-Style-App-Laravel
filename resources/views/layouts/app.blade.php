@@ -19,6 +19,24 @@
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .expand-transition {
+            transition: all .03s ease;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .expand-enter, .expand-leave {
+            height: 0;
+            padding: 0 20px;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -83,6 +101,7 @@
 
     @yield('content')
 </div>
+
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
